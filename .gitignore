@@ -1,2 +1,6 @@
 target/
 nbproject/
+.idea/
+*.jar
+*.iml
+
