@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.digitalcollections.rosetta</groupId>
   <artifactId>rosetta-openwayback-vpp</artifactId>
-  <version>1.0.0-RELEASE</version>
+  <version>1.0.1-RELEASE</version>
   <packaging>jar</packaging>
 
   <name>MDZ DLDC: Rosetta OpenWayback VPP</name>

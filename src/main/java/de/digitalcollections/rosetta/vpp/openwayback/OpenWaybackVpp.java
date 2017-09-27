@@ -4,6 +4,7 @@ import com.exlibris.digitool.common.dnx.DnxDocumentHelper;
 import com.exlibris.dps.sdk.delivery.AbstractViewerPreProcessor;
 import de.digitalcollections.rosetta.vpp.openwayback.service.MetadataService;
 import de.digitalcollections.rosetta.vpp.openwayback.service.WaybackUrlService;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Map;
 
@@ -26,11 +27,11 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
   }
 
   @Override
-  public void execute() throws ParseException {
+  public void execute() throws ParseException, UnsupportedEncodingException {
     execute(new DnxDocumentHelper(getDnx()), getViewContext());
   }
 
-  void execute(DnxDocumentHelper documentHelper, Map<String, String> viewContext) throws ParseException {
+  void execute(DnxDocumentHelper documentHelper, Map<String, String> viewContext) throws ParseException, UnsupportedEncodingException {
     if (hasRequestedDetail(viewContext)) {
       additionalParameters = createUrlPath(documentHelper.getWebHarvesting(), viewContext);
     }
@@ -39,7 +40,7 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
     }
   }
 
-  String createUrlPath(DnxDocumentHelper.WebHarvesting webHarvesting, Map<String, String> viewContext) throws ParseException {
+  String createUrlPath(DnxDocumentHelper.WebHarvesting webHarvesting, Map<String, String> viewContext) throws ParseException, UnsupportedEncodingException {
     String marker = getMarker(viewContext);
     return marker +
         waybackUrlService.createDetailUrlPath(webHarvesting.getPrimarySeedURL(), metadataService.parseHarvestDate(webHarvesting.getHarvestDate())) +
@@ -59,7 +60,7 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
     return viewContext.containsKey(DETAIL_KEY) && "true".equals(viewContext.get(DETAIL_KEY));
   }
 
-  String createOverviewQuery(DnxDocumentHelper.WebHarvesting webHarvesting) {
+  String createOverviewQuery(DnxDocumentHelper.WebHarvesting webHarvesting) throws UnsupportedEncodingException {
     return waybackUrlService.createOverviewQueryString(webHarvesting.getPrimarySeedURL());
   }
 
