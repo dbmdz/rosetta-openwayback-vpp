@@ -6,16 +6,11 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Collections.emptyMap;
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.endsWith;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.startsWith;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +21,7 @@ public class OpenWaybackVppTest {
 
   private DnxDocumentHelper.WebHarvesting webHarvesting;
 
-  @Before
+  @BeforeEach
   public void setUp() throws AccessException {
     vpp = new OpenWaybackVpp();
     webHarvesting = mock(DnxDocumentHelper.WebHarvesting.class);
@@ -38,37 +33,39 @@ public class OpenWaybackVppTest {
   public void createUrlPathResultShouldStartAndEndWithMarkers() throws ParseException, UnsupportedEncodingException {
     String marker = vpp.getMarker(emptyMap());
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
-    assertThat(path, allOf(startsWith(marker), endsWith(marker)));
+    assertThat(path)
+        .startsWith(marker)
+        .endsWith(marker);
   }
 
   @Test
   public void createUrlPathResultShouldContainUrlPath() throws ParseException, UnsupportedEncodingException {
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
-    assertThat(path, containsString("%2F20140312135704%2Fhttp%3A%2F%2Fwwww.bahn.de"));
+    assertThat(path).contains("%2F20140312135704%2Fhttp%3A%2F%2Fwwww.bahn.de");
   }
 
   @Test
   public void overviewQueryShouldSetQuery() throws UnsupportedEncodingException {
     String query = vpp.createOverviewQuery(webHarvesting);
-    assertThat(query, is("url=http%3A%2F%2Fwwww.bahn.de"));
+    assertThat(query).isEqualTo("url=http%3A%2F%2Fwwww.bahn.de");
   }
   @Test
   public void hasRequestedDetailShouldReturnTrueIfDetailIsRequested() {
     Map<String, String> viewContext = new HashMap<>();
     viewContext.put("detail", "true");
-    assertThat(vpp.hasRequestedDetail(viewContext), is(true));
+    assertThat(vpp.hasRequestedDetail(viewContext)).isTrue();
   }
 
   @Test
   public void hasRequestedDetailShouldReturnFalseIfDetailIsNotRequested() {
     Map<String, String> viewContext = new HashMap<>();
     viewContext.put("detail", "false");
-    assertThat(vpp.hasRequestedDetail(viewContext), is(false));
+    assertThat(vpp.hasRequestedDetail(viewContext)).isFalse();
   }
 
   @Test
   public void hasRequestedDetailShouldReturnFalseIfDetailIsNotSpecified() {
-    assertThat(vpp.hasRequestedDetail(emptyMap()), is(false));
+    assertThat(vpp.hasRequestedDetail(emptyMap())).isFalse();
   }
 
   @Test
@@ -79,7 +76,7 @@ public class OpenWaybackVppTest {
     Map<String, String> viewContext = new HashMap<>();
     viewContext.put("detail", "true");
     vpp.execute(documentHelper, viewContext);
-    assertThat(vpp.getAdditionalParameters(), containsString("20140312135704"));
+    assertThat(vpp.getAdditionalParameters()).contains("20140312135704");
   }
 
   @Test
@@ -87,19 +84,19 @@ public class OpenWaybackVppTest {
     DnxDocumentHelper documentHelper = mock(DnxDocumentHelper.class);
     when(documentHelper.getWebHarvesting()).thenReturn(webHarvesting);
     vpp.execute(documentHelper, emptyMap());
-    assertThat(vpp.getAdditionalParameters(), containsString("url"));
+    assertThat(vpp.getAdditionalParameters()).contains("url");
   }
 
   @Test
   public void getMarkerShouldBeConfigurable() {
     Map<String, String> viewContext = new HashMap<>();
     viewContext.put("marker", "ABC");
-    assertThat(vpp.getMarker(viewContext), is("ABC"));
+    assertThat(vpp.getMarker(viewContext)).isEqualTo("ABC");
   }
 
   @Test
   public void getMarkerShouldHaveDefaultValue() {
-    assertThat(vpp.getMarker(emptyMap()), is("@"));
+    assertThat(vpp.getMarker(emptyMap())).isEqualTo("@");
   }
 
 }

@@ -5,11 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class MetadataServiceTest {
@@ -18,7 +17,7 @@ public class MetadataServiceTest {
 
   private MetadataService metadataService;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     metadataService = new MetadataService();
   }
@@ -28,7 +27,7 @@ public class MetadataServiceTest {
     Calendar  calendar = new GregorianCalendar();
     calendar.set(2012, 10, 1, 23, 11, 5);
     Date date = calendar.getTime();
-    assertThat(metadataService.parseHarvestDate(FORMAT.format(date)).toString(), is(date.toString()));
+    assertThat(metadataService.parseHarvestDate(FORMAT.format(date)).toString()).isEqualTo(date.toString());
   }
 
 }
