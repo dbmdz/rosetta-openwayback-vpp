@@ -8,7 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Map;
 
-
 public class OpenWaybackVpp extends AbstractViewerPreProcessor {
 
   private static final String DETAIL_KEY = "detail";
@@ -34,17 +33,16 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
   void execute(DnxDocumentHelper documentHelper, Map<String, String> viewContext) throws ParseException, UnsupportedEncodingException {
     if (hasRequestedDetail(viewContext)) {
       additionalParameters = createUrlPath(documentHelper.getWebHarvesting(), viewContext);
-    }
-    else {
+    } else {
       additionalParameters = createOverviewQuery(documentHelper.getWebHarvesting());
     }
   }
 
   String createUrlPath(DnxDocumentHelper.WebHarvesting webHarvesting, Map<String, String> viewContext) throws ParseException, UnsupportedEncodingException {
     String marker = getMarker(viewContext);
-    return marker +
-        waybackUrlService.createDetailUrlPath(webHarvesting.getPrimarySeedURL(), metadataService.parseHarvestDate(webHarvesting.getHarvestDate())) +
-        marker;
+    return marker
+      + waybackUrlService.createDetailUrlPath(webHarvesting.getPrimarySeedURL(), metadataService.parseHarvestDate(webHarvesting.getHarvestDate()))
+      + marker;
   }
 
   @Override

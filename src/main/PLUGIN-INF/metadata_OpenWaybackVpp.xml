@@ -1,17 +1,17 @@
 <pl:metadata-config xmlns:pl="http://www.exlibrisgroup.com/Plugins/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
   <pl:pluginTypeName>VPPPlugin</pl:pluginTypeName>
   <pl:deployName>OpenWaybackVpp</pl:deployName>
- <pl:className>de.digitalcollections.rosetta.vpp.openwayback.OpenWaybackVpp</pl:className>
+  <pl:className>de.digitalcollections.rosetta.vpp.openwayback.OpenWaybackVpp</pl:className>
   <pl:initParameters>
-  <fr:x_form xmlns:fr="http://com/exlibris/digitool/common/forms/xmlbeans">
-	<form_name>OpenWaybackVpp_Params</form_name>
-	<description>OpenWaybackVpp_parameters_form</description>
-	<version>1.0</version>
-	<grid_x>1</grid_x>
-	<md_format>1</md_format>
-	<x_fields></x_fields>
-</fr:x_form>
-</pl:initParameters>
+    <fr:x_form xmlns:fr="http://com/exlibris/digitool/common/forms/xmlbeans">
+      <form_name>OpenWaybackVpp_Params</form_name>
+      <description>OpenWaybackVpp_parameters_form</description>
+      <version>1.0</version>
+      <grid_x>1</grid_x>
+      <md_format>1</md_format>
+      <x_fields></x_fields>
+    </fr:x_form>
+  </pl:initParameters>
   <pl:description>OpenWayback Viewer Pre-Processor</pl:description>
   <pl:version>1</pl:version>
   <pl:materialType>DIGITAL</pl:materialType>
