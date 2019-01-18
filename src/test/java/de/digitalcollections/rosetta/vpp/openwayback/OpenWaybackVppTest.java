@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
 public class OpenWaybackVppTest {
 
   private OpenWaybackVpp vpp;
@@ -34,8 +33,8 @@ public class OpenWaybackVppTest {
     String marker = vpp.getMarker(emptyMap());
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
     assertThat(path)
-        .startsWith(marker)
-        .endsWith(marker);
+      .startsWith(marker)
+      .endsWith(marker);
   }
 
   @Test
@@ -49,6 +48,7 @@ public class OpenWaybackVppTest {
     String query = vpp.createOverviewQuery(webHarvesting);
     assertThat(query).isEqualTo("url=http%3A%2F%2Fwwww.bahn.de");
   }
+
   @Test
   public void hasRequestedDetailShouldReturnTrueIfDetailIsRequested() {
     Map<String, String> viewContext = new HashMap<>();

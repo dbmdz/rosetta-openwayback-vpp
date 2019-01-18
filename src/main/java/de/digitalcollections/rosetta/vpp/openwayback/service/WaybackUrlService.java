@@ -11,10 +11,10 @@ import java.util.Date;
  */
 public class WaybackUrlService {
 
-  private static final SimpleDateFormat waybackDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+  private static final SimpleDateFormat WAYBACK_DATE_FORMAT = new SimpleDateFormat("yyyyMMddHHmmss");
 
   String urlDateString(Date date) {
-    return waybackDateFormat.format(date);
+    return WAYBACK_DATE_FORMAT.format(date);
   }
 
   public String createDetailUrlPath(String seed, Date harvestDate) throws UnsupportedEncodingException {
