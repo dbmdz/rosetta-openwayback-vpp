@@ -1,1 +1,3 @@
-include: "https://raw.githubusercontent.com/dbmdz/development/master/ci/.gitlab-ci-base.yml"
+include: 
+  - local: ".gitlab-ci-before-script.yml"
+  - remote: "https://raw.githubusercontent.com/dbmdz/development/master/ci/.gitlab-ci-base.yml"
