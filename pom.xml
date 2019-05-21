@@ -20,7 +20,7 @@
     <version.log4j>1.2.17</version.log4j>
     <!-- Plugins -->
     <version.jacoco-maven-plugin>0.8.3</version.jacoco-maven-plugin>
-    <version.maven-checkstyle-plugin>3.0.0</version.maven-checkstyle-plugin>
+    <version.maven-checkstyle-plugin>3.1.0</version.maven-checkstyle-plugin>
     <version.maven-surefire-plugin>2.22.1</version.maven-surefire-plugin>
     <version.tomcat-servlet-api>7.0.92</version.tomcat-servlet-api>
   </properties>
