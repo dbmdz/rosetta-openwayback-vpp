@@ -18,7 +18,7 @@ public class WaybackUrlService {
   }
 
   public String createDetailUrlPath(String seed, Date harvestDate) throws UnsupportedEncodingException {
-    return encode("/" + urlDateString(harvestDate) + "/" + seed);
+    return "/" + urlDateString(harvestDate) + "/" + seed;
   }
 
   public String createOverviewQueryString(String seed) throws UnsupportedEncodingException {

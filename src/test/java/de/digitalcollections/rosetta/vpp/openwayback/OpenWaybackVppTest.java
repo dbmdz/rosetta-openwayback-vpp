@@ -40,7 +40,7 @@ public class OpenWaybackVppTest {
   @Test
   public void createUrlPathResultShouldContainUrlPath() throws ParseException, UnsupportedEncodingException {
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
-    assertThat(path).contains("%2F20140312135704%2Fhttp%3A%2F%2Fwwww.bahn.de");
+    assertThat(path).contains("/20140312135704/http://wwww.bahn.de");
   }
 
   @Test

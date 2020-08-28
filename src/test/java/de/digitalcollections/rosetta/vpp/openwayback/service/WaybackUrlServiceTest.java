@@ -29,7 +29,7 @@ public class WaybackUrlServiceTest {
   @Test
   public void createDetailUrlPathShouldReturnValidPath() throws ParseException, UnsupportedEncodingException {
     Date date = FORMAT.parse("01/08/2012 23:07:05");
-    assertThat(service.createDetailUrlPath("http://example.com", date)).isEqualTo("%2F20120801230705%2Fhttp%3A%2F%2Fexample.com");
+    assertThat(service.createDetailUrlPath("http://example.com", date)).isEqualTo("/20120801230705/http://example.com");
   }
 
   @Test
