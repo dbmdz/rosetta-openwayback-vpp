@@ -22,6 +22,8 @@
     <version.jacoco-maven-plugin>0.8.5</version.jacoco-maven-plugin>
     <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
     <version.tomcat-servlet-api>7.0.105</version.tomcat-servlet-api>
+    <version.fmt-maven-plugin>2.10</version.fmt-maven-plugin>
+    <version.githook-maven-plugin>1.0.5</version.githook-maven-plugin>
   </properties>
 
   <dependencies>
@@ -101,6 +103,44 @@
             <goals>
               <goal>report</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.coveo</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <version>${version.fmt-maven-plugin}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.github.phillipuniverse</groupId>
+        <artifactId>githook-maven-plugin</artifactId>
+        <version>${version.githook-maven-plugin}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>install</goal>
+            </goals>
+            <configuration>
+              <hooks>
+                <pre-commit>
+                  if ! mvn com.coveo:fmt-maven-plugin:check ; then
+                  mvn com.coveo:fmt-maven-plugin:format
+                  echo -e "\e[31mCode has been reformatted to match code style\e[0m"
+                  echo -e "\e[31mPlease use git add … to add modified files\e[0m"
+                  echo "Your commit message was:"
+                  cat .git/COMMIT_EDITMSG
+                  exit 1
+                  fi
+                </pre-commit>
+              </hooks>
+            </configuration>
           </execution>
         </executions>
       </plugin>
