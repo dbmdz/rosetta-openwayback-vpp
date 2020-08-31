@@ -1,5 +1,10 @@
 package de.digitalcollections.rosetta.vpp.openwayback;
 
+import static java.util.Collections.emptyMap;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.exlibris.digitool.common.dnx.DnxDocumentHelper;
 import com.exlibris.dps.sdk.access.AccessException;
 import java.io.UnsupportedEncodingException;
@@ -8,11 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static java.util.Collections.emptyMap;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class OpenWaybackVppTest {
 
@@ -29,16 +29,16 @@ public class OpenWaybackVppTest {
   }
 
   @Test
-  public void createUrlPathResultShouldStartAndEndWithMarkers() throws ParseException, UnsupportedEncodingException {
+  public void createUrlPathResultShouldStartAndEndWithMarkers()
+      throws ParseException, UnsupportedEncodingException {
     String marker = vpp.getMarker(emptyMap());
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
-    assertThat(path)
-      .startsWith(marker)
-      .endsWith(marker);
+    assertThat(path).startsWith(marker).endsWith(marker);
   }
 
   @Test
-  public void createUrlPathResultShouldContainUrlPath() throws ParseException, UnsupportedEncodingException {
+  public void createUrlPathResultShouldContainUrlPath()
+      throws ParseException, UnsupportedEncodingException {
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
     assertThat(path).contains("/20140312135704/http://wwww.bahn.de");
   }
@@ -69,7 +69,8 @@ public class OpenWaybackVppTest {
   }
 
   @Test
-  public void executeShouldRunDetailIfRequested() throws ParseException, UnsupportedEncodingException {
+  public void executeShouldRunDetailIfRequested()
+      throws ParseException, UnsupportedEncodingException {
     DnxDocumentHelper documentHelper = mock(DnxDocumentHelper.class);
     when(documentHelper.getWebHarvesting()).thenReturn(webHarvesting);
 
@@ -80,7 +81,8 @@ public class OpenWaybackVppTest {
   }
 
   @Test
-  public void executeShouldRunOverviewIfDetailIsNotRequested() throws ParseException, UnsupportedEncodingException {
+  public void executeShouldRunOverviewIfDetailIsNotRequested()
+      throws ParseException, UnsupportedEncodingException {
     DnxDocumentHelper documentHelper = mock(DnxDocumentHelper.class);
     when(documentHelper.getWebHarvesting()).thenReturn(webHarvesting);
     vpp.execute(documentHelper, emptyMap());
@@ -98,5 +100,4 @@ public class OpenWaybackVppTest {
   public void getMarkerShouldHaveDefaultValue() {
     assertThat(vpp.getMarker(emptyMap())).isEqualTo("@");
   }
-
 }

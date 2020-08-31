@@ -5,19 +5,18 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Prepare data for OpenWayback.
- *
- */
+/** Prepare data for OpenWayback. */
 public class WaybackUrlService {
 
-  private static final SimpleDateFormat WAYBACK_DATE_FORMAT = new SimpleDateFormat("yyyyMMddHHmmss");
+  private static final SimpleDateFormat WAYBACK_DATE_FORMAT =
+      new SimpleDateFormat("yyyyMMddHHmmss");
 
   String urlDateString(Date date) {
     return WAYBACK_DATE_FORMAT.format(date);
   }
 
-  public String createDetailUrlPath(String seed, Date harvestDate) throws UnsupportedEncodingException {
+  public String createDetailUrlPath(String seed, Date harvestDate)
+      throws UnsupportedEncodingException {
     return "/" + urlDateString(harvestDate) + "/" + seed;
   }
 
@@ -28,5 +27,4 @@ public class WaybackUrlService {
   private String encode(String value) throws UnsupportedEncodingException {
     return URLEncoder.encode(value, "UTF-8");
   }
-
 }

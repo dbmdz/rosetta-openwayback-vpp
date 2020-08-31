@@ -6,10 +6,10 @@ import java.util.Date;
 
 public class MetadataService {
 
-  private static final SimpleDateFormat HARVEST_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+  private static final SimpleDateFormat HARVEST_DATE_FORMAT =
+      new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
   public Date parseHarvestDate(String source) throws ParseException {
     return HARVEST_DATE_FORMAT.parse(source);
   }
-
 }

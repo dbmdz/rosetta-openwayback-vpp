@@ -1,13 +1,13 @@
 package de.digitalcollections.rosetta.vpp.openwayback.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class WaybackUrlServiceTest {
 
@@ -27,14 +27,17 @@ public class WaybackUrlServiceTest {
   }
 
   @Test
-  public void createDetailUrlPathShouldReturnValidPath() throws ParseException, UnsupportedEncodingException {
+  public void createDetailUrlPathShouldReturnValidPath()
+      throws ParseException, UnsupportedEncodingException {
     Date date = FORMAT.parse("01/08/2012 23:07:05");
-    assertThat(service.createDetailUrlPath("http://example.com", date)).isEqualTo("/20120801230705/http://example.com");
+    assertThat(service.createDetailUrlPath("http://example.com", date))
+        .isEqualTo("/20120801230705/http://example.com");
   }
 
   @Test
-  public void createOverviewQueryStringShouldReturnValidQueryString() throws UnsupportedEncodingException {
-    assertThat(service.createOverviewQueryString("http://example.com")).isEqualTo("url=http%3A%2F%2Fexample.com");
+  public void createOverviewQueryStringShouldReturnValidQueryString()
+      throws UnsupportedEncodingException {
+    assertThat(service.createOverviewQueryString("http://example.com"))
+        .isEqualTo("url=http%3A%2F%2Fexample.com");
   }
-
 }

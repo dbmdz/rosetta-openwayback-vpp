@@ -1,5 +1,7 @@
 package de.digitalcollections.rosetta.vpp.openwayback.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,8 +9,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class MetadataServiceTest {
 
@@ -26,7 +26,7 @@ public class MetadataServiceTest {
     Calendar calendar = new GregorianCalendar();
     calendar.set(2012, 10, 1, 23, 11, 5);
     Date date = calendar.getTime();
-    assertThat(metadataService.parseHarvestDate(FORMAT.format(date)).toString()).isEqualTo(date.toString());
+    assertThat(metadataService.parseHarvestDate(FORMAT.format(date)).toString())
+        .isEqualTo(date.toString());
   }
-
 }
