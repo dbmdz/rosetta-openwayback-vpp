@@ -4,14 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WaybackUrlServiceTest {
 
-  private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+  private static final DateTimeFormatter FORMAT =
+      DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
   private WaybackUrlService service;
 
@@ -22,14 +23,14 @@ public class WaybackUrlServiceTest {
 
   @Test
   public void urlDateStringShouldFormatDate() throws ParseException {
-    Date date = FORMAT.parse("01/08/2012 23:07:05");
+    LocalDateTime date = LocalDateTime.parse("01/08/2012 23:07:05", FORMAT);
     assertThat(service.urlDateString(date)).isEqualTo("20120801230705");
   }
 
   @Test
   public void createDetailUrlPathShouldReturnValidPath()
       throws ParseException, UnsupportedEncodingException {
-    Date date = FORMAT.parse("01/08/2012 23:07:05");
+    LocalDateTime date = LocalDateTime.parse("01/08/2012 23:07:05", FORMAT);
     assertThat(service.createDetailUrlPath("http://example.com", date))
         .isEqualTo("/20120801230705/http://example.com");
   }
