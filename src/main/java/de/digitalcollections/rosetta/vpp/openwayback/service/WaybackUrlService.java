@@ -15,8 +15,7 @@ public class WaybackUrlService {
     return WAYBACK_DATE_FORMAT.format(date);
   }
 
-  public String createDetailUrlPath(String seed, Date harvestDate)
-      throws UnsupportedEncodingException {
+  public String createDetailUrlPath(String seed, Date harvestDate) {
     return "/" + urlDateString(harvestDate) + "/" + seed;
   }
 
