@@ -3,16 +3,16 @@ package de.digitalcollections.rosetta.vpp.openwayback.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MetadataServiceTest {
 
-  private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+  private static final DateTimeFormatter FORMAT =
+      DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
   private MetadataService metadataService;
 
@@ -23,9 +23,7 @@ public class MetadataServiceTest {
 
   @Test
   public void parseHarvestDateShouldParseDate() throws ParseException {
-    Calendar calendar = new GregorianCalendar();
-    calendar.set(2012, 10, 1, 23, 11, 5);
-    Date date = calendar.getTime();
+    LocalDateTime date = LocalDateTime.of(2018, Month.APRIL, 15, 23, 10, 05);
     assertThat(metadataService.parseHarvestDate(FORMAT.format(date)).toString())
         .isEqualTo(date.toString());
   }

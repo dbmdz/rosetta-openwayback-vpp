@@ -24,6 +24,8 @@
     <version.tomcat-servlet-api>7.0.105</version.tomcat-servlet-api>
     <version.fmt-maven-plugin>2.10</version.fmt-maven-plugin>
     <version.githook-maven-plugin>1.0.5</version.githook-maven-plugin>
+    <version.spotbugs-maven-plugin>4.0.4</version.spotbugs-maven-plugin>
+    <version.spotbugs>4.1.2</version.spotbugs>
   </properties>
 
   <dependencies>
@@ -141,6 +143,29 @@
                 </pre-commit>
               </hooks>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${version.spotbugs-maven-plugin}</version>
+        <dependencies>
+          <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>${version.spotbugs}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <failOnError>false</failOnError>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
