@@ -3,7 +3,6 @@ package de.digitalcollections.rosetta.vpp.openwayback.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,14 +21,13 @@ public class WaybackUrlServiceTest {
   }
 
   @Test
-  public void urlDateStringShouldFormatDate() throws ParseException {
+  public void urlDateStringShouldFormatDate() {
     LocalDateTime date = LocalDateTime.parse("01/08/2012 23:07:05", FORMAT);
     assertThat(service.urlDateString(date)).isEqualTo("20120801230705");
   }
 
   @Test
-  public void createDetailUrlPathShouldReturnValidPath()
-      throws ParseException, UnsupportedEncodingException {
+  public void createDetailUrlPathShouldReturnValidPath() {
     LocalDateTime date = LocalDateTime.parse("01/08/2012 23:07:05", FORMAT);
     assertThat(service.createDetailUrlPath("http://example.com", date))
         .isEqualTo("/20120801230705/http://example.com");

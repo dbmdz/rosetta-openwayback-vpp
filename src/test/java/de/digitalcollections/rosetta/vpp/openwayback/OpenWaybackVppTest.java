@@ -6,7 +6,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.exlibris.digitool.common.dnx.DnxDocumentHelper;
-import com.exlibris.dps.sdk.access.AccessException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -21,7 +20,7 @@ public class OpenWaybackVppTest {
   private DnxDocumentHelper.WebHarvesting webHarvesting;
 
   @BeforeEach
-  public void setUp() throws AccessException {
+  public void setUp() {
     vpp = new OpenWaybackVpp();
     webHarvesting = mock(DnxDocumentHelper.WebHarvesting.class);
     when(webHarvesting.getHarvestDate()).thenReturn("12/03/2014 13:57:04");
@@ -29,16 +28,14 @@ public class OpenWaybackVppTest {
   }
 
   @Test
-  public void createUrlPathResultShouldStartAndEndWithMarkers()
-      throws ParseException, UnsupportedEncodingException {
+  public void createUrlPathResultShouldStartAndEndWithMarkers() throws ParseException {
     String marker = vpp.getMarker(emptyMap());
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
     assertThat(path).startsWith(marker).endsWith(marker);
   }
 
   @Test
-  public void createUrlPathResultShouldContainUrlPath()
-      throws ParseException, UnsupportedEncodingException {
+  public void createUrlPathResultShouldContainUrlPath() throws ParseException {
     String path = vpp.createUrlPath(webHarvesting, emptyMap());
     assertThat(path).contains("/20140312135704/http://wwww.bahn.de");
   }
