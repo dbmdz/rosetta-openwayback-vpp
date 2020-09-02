@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.digitalcollections.rosetta</groupId>
   <artifactId>rosetta-openwayback-vpp</artifactId>
-  <version>1.0.1-RELEASE</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>MDZ DLDC: Rosetta OpenWayback VPP</name>
@@ -13,16 +13,19 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <!-- Dependencies -->
-    <version.assertj>3.11.1</version.assertj>
-    <version.dps-sdk>5.0.1</version.dps-sdk>
-    <version.junit-jupiter>5.3.2</version.junit-jupiter>
+    <version.assertj>3.17.0</version.assertj>
+    <version.dps-sdk>6.3.0</version.dps-sdk>
+    <version.junit-jupiter>5.6.2</version.junit-jupiter>
     <version.mockito-all>2.0.2-beta</version.mockito-all>
     <version.log4j>1.2.17</version.log4j>
     <!-- Plugins -->
-    <version.jacoco-maven-plugin>0.8.3</version.jacoco-maven-plugin>
-    <version.maven-checkstyle-plugin>3.0.0</version.maven-checkstyle-plugin>
-    <version.maven-surefire-plugin>2.22.1</version.maven-surefire-plugin>
-    <version.tomcat-servlet-api>7.0.92</version.tomcat-servlet-api>
+    <version.jacoco-maven-plugin>0.8.5</version.jacoco-maven-plugin>
+    <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
+    <version.tomcat-servlet-api>7.0.105</version.tomcat-servlet-api>
+    <version.fmt-maven-plugin>2.10</version.fmt-maven-plugin>
+    <version.githook-maven-plugin>1.0.5</version.githook-maven-plugin>
+    <version.spotbugs-maven-plugin>4.0.4</version.spotbugs-maven-plugin>
+    <version.spotbugs>4.1.2</version.spotbugs>
   </properties>
 
   <dependencies>
@@ -83,27 +86,6 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${version.maven-checkstyle-plugin}</version>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <configuration>
-              <configLocation>https://raw.githubusercontent.com/dbmdz/development/master/code-quality/checkstyle.xml</configLocation>
-              <encoding>UTF-8</encoding>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>true</failsOnError>
-              <linkXRef>false</linkXRef>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${version.maven-surefire-plugin}</version>
       </plugin>
@@ -122,6 +104,67 @@
             <phase>test</phase>
             <goals>
               <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.coveo</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <version>${version.fmt-maven-plugin}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.github.phillipuniverse</groupId>
+        <artifactId>githook-maven-plugin</artifactId>
+        <version>${version.githook-maven-plugin}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>install</goal>
+            </goals>
+            <configuration>
+              <hooks>
+                <pre-commit>
+                  if ! mvn com.coveo:fmt-maven-plugin:check ; then
+                  mvn com.coveo:fmt-maven-plugin:format
+                  echo -e "\e[31mCode has been reformatted to match code style\e[0m"
+                  echo -e "\e[31mPlease use git add … to add modified files\e[0m"
+                  echo "Your commit message was:"
+                  cat .git/COMMIT_EDITMSG
+                  exit 1
+                  fi
+                </pre-commit>
+              </hooks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${version.spotbugs-maven-plugin}</version>
+        <dependencies>
+          <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>${version.spotbugs}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <failOnError>false</failOnError>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
             </goals>
           </execution>
         </executions>

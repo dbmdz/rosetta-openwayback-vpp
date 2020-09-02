@@ -30,7 +30,8 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
     execute(new DnxDocumentHelper(getDnx()), getViewContext());
   }
 
-  void execute(DnxDocumentHelper documentHelper, Map<String, String> viewContext) throws ParseException, UnsupportedEncodingException {
+  void execute(DnxDocumentHelper documentHelper, Map<String, String> viewContext)
+      throws ParseException, UnsupportedEncodingException {
     if (hasRequestedDetail(viewContext)) {
       additionalParameters = createUrlPath(documentHelper.getWebHarvesting(), viewContext);
     } else {
@@ -38,11 +39,15 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
     }
   }
 
-  String createUrlPath(DnxDocumentHelper.WebHarvesting webHarvesting, Map<String, String> viewContext) throws ParseException, UnsupportedEncodingException {
+  String createUrlPath(
+      DnxDocumentHelper.WebHarvesting webHarvesting, Map<String, String> viewContext)
+      throws ParseException, UnsupportedEncodingException {
     String marker = getMarker(viewContext);
     return marker
-      + waybackUrlService.createDetailUrlPath(webHarvesting.getPrimarySeedURL(), metadataService.parseHarvestDate(webHarvesting.getHarvestDate()))
-      + marker;
+        + waybackUrlService.createDetailUrlPath(
+            webHarvesting.getPrimarySeedURL(),
+            metadataService.parseHarvestDate(webHarvesting.getHarvestDate()))
+        + marker;
   }
 
   @Override
@@ -58,8 +63,8 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
     return viewContext.containsKey(DETAIL_KEY) && "true".equals(viewContext.get(DETAIL_KEY));
   }
 
-  String createOverviewQuery(DnxDocumentHelper.WebHarvesting webHarvesting) throws UnsupportedEncodingException {
+  String createOverviewQuery(DnxDocumentHelper.WebHarvesting webHarvesting)
+      throws UnsupportedEncodingException {
     return waybackUrlService.createOverviewQueryString(webHarvesting.getPrimarySeedURL());
   }
-
 }
