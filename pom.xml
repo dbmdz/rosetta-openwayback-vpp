@@ -13,10 +13,10 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <!-- Dependencies -->
-    <version.assertj>3.17.0</version.assertj>
+    <version.assertj>3.17.2</version.assertj>
     <version.dps-sdk>6.3.0</version.dps-sdk>
     <version.junit-jupiter>5.6.2</version.junit-jupiter>
-    <version.mockito-core>3.5.7</version.mockito-core>
+    <version.mockito-core>3.5.10</version.mockito-core>
     <version.log4j>1.2.17</version.log4j>
     <!-- Plugins -->
     <version.jacoco-maven-plugin>0.8.5</version.jacoco-maven-plugin>
@@ -36,7 +36,7 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
+      <artifactId>junit-jupiter</artifactId>
       <version>${version.junit-jupiter}</version>
       <scope>test</scope>
     </dependency>
@@ -44,6 +44,7 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${version.assertj}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
