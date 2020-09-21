@@ -13,15 +13,14 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <!-- Dependencies -->
-    <version.assertj>3.17.0</version.assertj>
+    <version.assertj>3.17.2</version.assertj>
     <version.dps-sdk>6.3.0</version.dps-sdk>
     <version.junit-jupiter>5.6.2</version.junit-jupiter>
-    <version.mockito-all>2.0.2-beta</version.mockito-all>
+    <version.mockito-core>3.5.10</version.mockito-core>
     <version.log4j>1.2.17</version.log4j>
     <!-- Plugins -->
     <version.jacoco-maven-plugin>0.8.5</version.jacoco-maven-plugin>
     <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
-    <version.tomcat-servlet-api>7.0.105</version.tomcat-servlet-api>
     <version.fmt-maven-plugin>2.10</version.fmt-maven-plugin>
     <version.githook-maven-plugin>1.0.5</version.githook-maven-plugin>
     <version.spotbugs-maven-plugin>4.0.4</version.spotbugs-maven-plugin>
@@ -37,13 +36,7 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
+      <artifactId>junit-jupiter</artifactId>
       <version>${version.junit-jupiter}</version>
       <scope>test</scope>
     </dependency>
@@ -51,17 +44,12 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${version.assertj}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tomcat</groupId>
-      <artifactId>tomcat-servlet-api</artifactId>
-      <version>${version.tomcat-servlet-api}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <version>${version.mockito-all}</version>
+      <artifactId>mockito-core</artifactId>
+      <version>${version.mockito-core}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

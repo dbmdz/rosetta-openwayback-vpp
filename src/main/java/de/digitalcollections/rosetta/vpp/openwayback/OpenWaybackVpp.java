@@ -41,7 +41,7 @@ public class OpenWaybackVpp extends AbstractViewerPreProcessor {
 
   String createUrlPath(
       DnxDocumentHelper.WebHarvesting webHarvesting, Map<String, String> viewContext)
-      throws ParseException, UnsupportedEncodingException {
+      throws ParseException {
     String marker = getMarker(viewContext);
     return marker
         + waybackUrlService.createDetailUrlPath(
