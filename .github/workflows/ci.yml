@@ -1,0 +1,32 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [11, 14]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - uses: actions/cache@v2
+        env:
+          cache-name: cache-maven-artifacts
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+      - name: Install complicated libraries 😱
+        run: |
+          curl -sS -O https://raw.githubusercontent.com/ExLibrisGroup/Rosetta.dps-sdk-projects/master/6.3/dps-sdk-projects/dps-sdk-deposit/lib/dps-sdk-6.3.0.jar
+          mvn install:install-file -Dfile=dps-sdk-6.3.0.jar -DgroupId=com.exlibris.dps -DartifactId=dps-sdk -Dversion=6.3.0 -Dpackaging=jar
+      - name: Build with Maven
+        run: mvn -B verify
+      - name: Report Coverage
+        uses: codecov/codecov-action@v1
