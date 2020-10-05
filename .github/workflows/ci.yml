@@ -28,5 +28,3 @@ jobs:
           mvn install:install-file -Dfile=dps-sdk-6.3.0.jar -DgroupId=com.exlibris.dps -DartifactId=dps-sdk -Dversion=6.3.0 -Dpackaging=jar
       - name: Build with Maven
         run: mvn -B verify
-      - name: Report Coverage
-        uses: codecov/codecov-action@v1
