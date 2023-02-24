@@ -21,10 +21,10 @@
     <!-- Plugins -->
     <version.jacoco-maven-plugin>0.8.5</version.jacoco-maven-plugin>
     <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
-    <version.fmt-maven-plugin>2.10</version.fmt-maven-plugin>
+    <version.fmt-maven-plugin>2.19</version.fmt-maven-plugin>
     <version.githook-maven-plugin>1.0.5</version.githook-maven-plugin>
-    <version.spotbugs-maven-plugin>4.0.4</version.spotbugs-maven-plugin>
-    <version.spotbugs>4.1.2</version.spotbugs>
+    <version.spotbugs-maven-plugin>4.7.3.0</version.spotbugs-maven-plugin>
+    <version.spotbugs>4.7.3</version.spotbugs>
   </properties>
 
   <dependencies>
@@ -97,7 +97,7 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>com.coveo</groupId>
+        <groupId>com.spotify.fmt</groupId>
         <artifactId>fmt-maven-plugin</artifactId>
         <version>${version.fmt-maven-plugin}</version>
         <executions>
@@ -120,8 +120,8 @@
             <configuration>
               <hooks>
                 <pre-commit>
-                  if ! mvn com.coveo:fmt-maven-plugin:check ; then
-                  mvn com.coveo:fmt-maven-plugin:format
+                  if ! mvn com.spotify.fmt:fmt-maven-plugin:check ; then
+                  mvn com.spotify.fmt:fmt-maven-plugin:format
                   echo -e "\e[31mCode has been reformatted to match code style\e[0m"
                   echo -e "\e[31mPlease use git add … to add modified files\e[0m"
                   echo "Your commit message was:"
